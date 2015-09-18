@@ -1,22 +1,25 @@
 var time1 = new Date().getTime();
 
 function isIn1(arr, X) {  //Оценка сложности O(C)
-    return arr.indexOf(X) !== -1
+    for(var i = 0; i > arr.length; i++) {
+        if(arr[i] === X) {
+            return true
+        }
+    }
+    return false
 }
 function isIn2(arr, X) {  //Оценка сложности O(log(n))
     if(arr.length > 1) {
         var index = Math.floor(arr.length/2),
-            middle = arr[index],
-            left = arr.slice(0, index),
-            right = arr.slice(index + 1);
+            middle = arr[index];
     
         if(X == middle) {
             return true
         }
         if(X < middle) {
-            return isIn2(left, X)
+            return isIn2(arr.slice(0, index), X)
         } else {
-            return isIn2(right, X)
+            return isIn2(arr.slice(index + 1), X)
         }
     }
     return false
