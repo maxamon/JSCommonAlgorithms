@@ -1,2 +1,2 @@
-# JSCommonAlgorithms
-Different algorithms on JavaScrite
+# JS Common Algorithms
+Different algorithms in JavaScript
