@@ -1,7 +1,7 @@
 var time1 = new Date().getTime();
 
 function isIn1(arr, X) {  //Оценка сложности O(C)
-    for(var i = 0; i > arr.length; i++) {
+    for(var i = 0; i < arr.length; i++) {
         if(arr[i] === X) {
             return true
         }
@@ -25,6 +25,26 @@ function isIn2(arr, X) {  //Оценка сложности O(log(n))
     return false
 }
 
+function isIn3(arr, X) {  //Оценка сложности O(log(n))
+    function helper(start, stop) {
+      if(start <= stop) {
+          var index = start + Math.floor((stop - start)/2),
+              middle = arr[index];
+      
+          if(X == middle) {
+              return true
+          }
+          if(X < middle) {
+              return helper(start, index)
+          } else {
+              return helper((index + 1), stop)
+          }
+      }
+      return false
+    }
+    return helper(0, arr.length - 1)
+}
+
 //Test
 function generate() {
     var arr = [];
@@ -35,14 +55,20 @@ function generate() {
 }
 
 var arr = generate();
+var searchValue = arr.length-1
+  
 var time2 = new Date().getTime();
 console.log("generate: "+(time2 - time1))
 
 //var arr = [1,2,4,5,7,9,10,13,18];
-console.log(isIn1(arr, 7)); //True
+console.log(isIn1(arr, searchValue)); //True
 var time3 = new Date().getTime();
-console.log("generate: "+(time3 - time2))
+console.log("isIn1: "+(time3 - time2))
 
-console.log(isIn2(arr, 7)); //False
+console.log(isIn2(arr, searchValue)); //
 var time4 = new Date().getTime();
-console.log("generate: "+(time4 - time3))
+console.log("isIn2: "+(time4 - time3))
+
+console.log(isIn3(arr, searchValue)); //
+var time5 = new Date().getTime();
+console.log("isIn3: "+(time5 - time4))
